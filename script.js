@@ -1,9 +1,27 @@
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+
+    });
+
+}, {
+    threshold: 0.2
+});
+
+document.querySelectorAll(".fade-in").forEach(el => {
+    observer.observe(el);
+});
+
 const menuBtn = document.getElementById("menuBtn");
 const mobileMenu = document.getElementById("mobileMenu");
 
 function updateMobileMenuPosition() {
     const rect = menuBtn.getBoundingClientRect();
-    mobileMenu.style.top = `${rect.bottom + 10}px`;
+    mobileMenu.style.top = `${rect.bottom + 8}px`;
     mobileMenu.style.right = `${window.innerWidth - rect.right}px`;
 }
 
@@ -31,24 +49,6 @@ mobileMenu.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
         mobileMenu.classList.remove("active");
     });
-});
-
-const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-            entry.target.classList.add("show");
-        }
-
-    });
-
-}, {
-    threshold: 0.2
-});
-
-document.querySelectorAll(".fade-in").forEach(el => {
-    observer.observe(el);
 });
 
 const navLinks = document.querySelectorAll(".primary-nav a");
