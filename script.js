@@ -70,3 +70,32 @@ const navObserver = new IntersectionObserver((entries) => {
 scrollSections.forEach(section => {
     navObserver.observe(section);
 });
+
+let audioContext;
+
+function playHoverSound() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    const now = audioContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(330, now);
+    gainNode.gain.setValueAtTime(0.0, now);
+    gainNode.gain.linearRampToValueAtTime(0.08, now + 0.03);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.start(now);
+    oscillator.stop(now + 0.18);
+}
+
+const hoverCards = document.querySelectorAll('.feature-card, .benefit');
+hoverCards.forEach(card => {
+    card.addEventListener('mouseenter', playHoverSound);
+});

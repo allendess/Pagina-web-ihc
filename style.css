@@ -463,6 +463,7 @@ body{
     display:flex;
     flex-direction:column;
     justify-content:flex-start;
+    cursor:pointer;
 }
 
 .feature-card:hover{
@@ -525,11 +526,11 @@ body{
 }
 
 .benefits{
-    width:85%;
-    max-width:1080px;
+    width:96%;
+    max-width:1400px;
     margin:40px auto;
     display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
+    grid-template-columns:repeat(5, minmax(0, 1fr));
     gap:22px;
 }
 
@@ -553,6 +554,7 @@ body{
     text-align:center;
     box-shadow:0 10px 20px rgba(0,0,0,.08);
     transition:.3s;
+    cursor:pointer;
 }
 
 .benefit:hover{
